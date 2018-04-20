@@ -16,11 +16,21 @@ RUN mkdir /home/root
 COPY startup_instruction.sh /home/root/startup_instruction.sh
 COPY startup_playground.sh /home/root/startup_playground.sh
 COPY refreshWorkshops.sh /home/root/refreshWorkshops.sh
+COPY setGitOptions.sh /home/root/setGitOptions.sh
 RUN chmod ugo+x /home/root/startup_instruction.sh
 RUN chmod ugo+x /home/root/startup_playground.sh
 RUN chmod ugo+rx /home/root/refreshWorkshops.sh
+RUN chmod ugo+rx /home/root/setGitOptions.sh
+
+## Taskjuggler and Ruby
+RUN apt-get update && \
+	apt-get purge ruby && \
+	apt-get install -y --no-install-recommends \
+	ruby
+RUN gem install taskjuggler
 
 WORKDIR /home/jovyan
+RUN rm -f /home/jovyan/pandoc-1.19.1-1-amd64.deb
 RUN rm -rf /home/jovyan/work
 
 USER jovyan

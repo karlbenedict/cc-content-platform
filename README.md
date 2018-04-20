@@ -1,6 +1,6 @@
-# UNM RDS Content Platform for the Coffee & Code Workshop Series
+# UNM RDS Workshops Content Platform
 
-This repository contains the needed code to replicate the presentation and playground environments used for the UNM Research Data Services (RDS) Coffee & Code workshop series.  The materials in this repository leverage Docker as a platform for developing and deploying portable containers that support individual applications. In the case of the Coffee & Code instruction platform, the applications that are integrated into the system include:
+This repository contains the needed code to replicate the presentation and playground environments used for the UNM Research Data Services (RDS) workshops.  The materials in this repository leverage Docker as a platform for developing and deploying portable containers that support individual applications. In the case of the Coffee & Code instruction platform, the applications that are integrated into the system include:
 
 * Jupyter Notebooks as a presentation, demonstration, and experimentation environment (based on the [datascience-notebook container](https://github.com/jupyter/docker-stacks/tree/master/datascience-notebook) with the addition of [Pandoc](https://pandoc.org) and [LaTeX](https://www.latex-project.org))
 * A web-based RStudio environment (based on the [rocker/rstudio](https://github.com/rocker-org/rocker) with the addition of the R `dplyr`, `ggplot2`, `ggrepel`)
@@ -11,29 +11,18 @@ This repository contains the needed code to replicate the presentation and playg
 	- Python
 	- R
 
-When initiated, the Coffee & Code instruction environment creates one or two instances of the instruction environment depending on your needs, and the startup command that you run. 
+When initiated, the one or two instances of the instruction environment will be created depending on your needs, and the startup command that you run. 
 
 * One from which the presentation/demonstration can be run
 * A second *Plaground* instance that contains all of the presentation and demonstration materials that workshop participants can experiment with during the workshop. 
 
 These platforms are accessible over the web on the host that RDS maintains at:
 
-For the *Playground*\
-Jupyter Notebook: [http://cc.unmrds.net:8888](http://cc.unmrds.net:8888)\
-RStudio: [http://cc.unmrds.net:8787](http://cc.unmrds.net:8787)
-
-
-and
-
-For the *Instruction* platform\
-Jupyter Notebook: [http://cc.unmrds.net:8889](http://cc.unmrds.net:8889)\
-RStudio: [http://cc.unmrds.net:8788](http://cc.unmrds.net:8788)
-
 When run on a local computer the two environments will be available at: 
 
-[http://localhost:8888](http://localhost:8888) and [http://localhost:8787](http://localhost:8787) for the *playground*
+[http://localhost:8888](http://localhost:8888) (for Jupyter notebooks) and [http://localhost:8787](http://localhost:8787) (for RStudio) for the *playground*
 
-[http://localhost:8889](http://localhost:8889) and [http://localhost:8788](http://localhost:8788) for the *instruction* platform
+[http://localhost:8889](http://localhost:8889) (for Jupyter notebooks) and [http://localhost:8788](http://localhost:8788) (for RStudio) for the *instruction* platform
 
 ## Running the platform on your local workstation or on a server
 
@@ -41,9 +30,9 @@ To run the full environment, including downloading all of the workshop materials
 
 [https://www.docker.com/community-edition](https://www.docker.com/community-edition). 
 
-Once you have an operational Docker system on your computer, download (and unzip) a [zipfile](https://github.com/unmrds/cc-content-platform/archive/master.zip) containing the contents of the repository, or if you use [Git](https://git-scm.com) you can also clone the repository to your local computer using the 
+Once you have an operational Docker system on your computer, download (and unzip) a [zipfile](https://github.com/karlbenedict/workshops/archive/master.zip) containing the contents of the repository, or if you use [Git](https://git-scm.com) you can also clone the repository to your local computer using the 
 
-    git clone https://github.com/unmrds/cc-content-platform.git 
+    git clone https://github.com/karlbenedict/workshops.git 
 
 command. 
 

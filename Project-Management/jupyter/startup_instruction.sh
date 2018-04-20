@@ -1,7 +1,7 @@
 #!/usr/bin/env bash 
 
 cd /home/jovyan
-cp /home/root/refreshWorkshops.sh /home/jovyan/refreshWorkshops.sh
+cp /home/root/setGitOptions.sh /home/jovyan/setGitOptions.sh
 /home/jovyan/refreshWorkshops.sh
 
 chown -R jovyan /home/jovyan
