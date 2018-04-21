@@ -1,79 +1,55 @@
-# UNM RDS Workshops Content Platform
+# UNM Research Data Services Workshop Platform
 
-This repository contains the needed code to replicate the presentation and playground environments used for the UNM Research Data Services (RDS) workshops.  The materials in this repository leverage Docker as a platform for developing and deploying portable containers that support individual applications. In the case of the Coffee & Code instruction platform, the applications that are integrated into the system include:
+This repository contains [Docker](https://www.docker.com) container packages that enable local or server-based workshop content access and use. The container configurations may vary from workshop to workshop, but typically includes an enhanced version of the [jupyter/datascience-notebook](https://hub.docker.com/r/jupyter/datascience-notebook/) maintained by [Jupyter.org](https://hub.docker.com/u/jupyter/). 
 
-* Jupyter Notebooks as a presentation, demonstration, and experimentation environment (based on the [datascience-notebook container](https://github.com/jupyter/docker-stacks/tree/master/datascience-notebook) with the addition of [Pandoc](https://pandoc.org) and [LaTeX](https://www.latex-project.org))
-* A web-based RStudio environment (based on the [rocker/rstudio](https://github.com/rocker-org/rocker) with the addition of the R `dplyr`, `ggplot2`, `ggrepel`)
-* Installed tools within the Jupyter Notebook platform include:
-	- Git
-	- Pandoc & LaTeX
-	- BASH shell
-	- Python
-	- R
+Each workshop folder contains one or more `docker-compose` YAML files that, when run, will run the workshop platform on the host system. Typically, once running, the platform may be accessed through the user's web browser on the host system through the `http://localhost:8888` address. Some workhops may run more than one web-based container, and in those cases the additional web addresses will be provided in the workshop-specific `README.md` file. 
 
-When initiated, the one or two instances of the instruction environment will be created depending on your needs, and the startup command that you run. 
+The current workshops included in the repository include:
 
-* One from which the presentation/demonstration can be run
-* A second *Plaground* instance that contains all of the presentation and demonstration materials that workshop participants can experiment with during the workshop. 
+* `Project-Management`: a workshop focused on presenting basic research project management principles and providing hands-on experience in using [TaskJuggler](http://taskjuggler.org) to plan, execute, and track project activities and progress. 
 
-These platforms are accessible over the web on the host that RDS maintains at:
+## Requirements to run the platform
 
-When run on a local computer the two environments will be available at: 
+In order to run the platform on your local computer or on a server you must have the [Docker Platform](https://www.docker.com/community-edition) installed on your platform. [Docker compose](https://docs.docker.com/compose/install/) must also be installed on your system. This is included in some installations of Docker by default. 
 
-[http://localhost:8888](http://localhost:8888) (for Jupyter notebooks) and [http://localhost:8787](http://localhost:8787) (for RStudio) for the *playground*
+You must also transfer the workshop repository to your system to be able to run the startup commands provided below. You can transfer the repository by:
 
-[http://localhost:8889](http://localhost:8889) (for Jupyter notebooks) and [http://localhost:8788](http://localhost:8788) (for RStudio) for the *instruction* platform
+* downloading the [Zip archive](https://github.com/karlbenedict/workshops/archive/master.zip) from GitHub and unzipping it on your local computer, or
+* if you have [Git](https://git-scm.com) installed on your computer you may clone the repository to your computer by using the following command:
 
-## Running the platform on your local workstation or on a server
+    git clone https://github.com/karlbenedict/workshops.git
 
-To run the full environment, including downloading all of the workshop materials into the working copy of the platform, you need to have an operating Docker environment on your system that includes both the core Docker engine, and support for the `docker-compose` system. The installation and execution code provided in this repository has been developed and tested with the [Docker Community Edition (CE]](https://www.docker.com/community-edition). Infomation about the Docker CE platform and instructions for installing Docker CE on your system can be found here:
+## Running the platform
 
-[https://www.docker.com/community-edition](https://www.docker.com/community-edition). 
+The workshop platform may be run using the default configuration of one instance of the platform (the recommended approach when running the platform as a workshop participant) by executing the following command from within the appropriate workshop folder:
 
-Once you have an operational Docker system on your computer, download (and unzip) a [zipfile](https://github.com/karlbenedict/workshops/archive/master.zip) containing the contents of the repository, or if you use [Git](https://git-scm.com) you can also clone the repository to your local computer using the 
+    docker-compose up -d --build
 
-    git clone https://github.com/karlbenedict/workshops.git 
+This will use the default configuration defined in the `docker-compose.yml` file in the folder where the command is run. If you want to run an alternative docker-compose configuration file you can execute the following command:
+
+    docker-compose -f <alternative YAML filename> up -d --build
+
+replacing `<alternative YAML filename>` with the name of the file you want to use. 
+
+## Stopping the platform
+
+Since the workshop environment is published using a specified port on the host machine (`8888` by default), you can only run one instance of the workshop platform at a time. To switch to another workshop platform you will need to stop the current one that is running, *otherwise the command provided above to run the new workshop platform will fail*. 
+
+You can see what containers are running on your system, and the ports that they are assigned to by executing the
+
+    docker ps
 
 command. 
 
-From within the repository directory you have two options, both executed from the appropriate *command line* tool for your operating system:
+To stop the currently running workshop platform you can execute the following command from within the workshop directory that you started it from:
 
-1. Run only the *playground* environment - **the most useful option for workshop participants and for self-paced learning.** 
+    docker-compose down
 
-	docker-compose up -d --build
+If you want to remove any new or modified files from your local copy of the workshop platform you can use the following variant of the above command:
 
-command. As noted above, once running, the platform should be available through a web browser on your local computer at:
+    docker-compose down -v
 
-[http://localhost:8888](http://localhost:8888) and [http://localhost:8787](http://localhost:8787) for the *playground*
+This will remove the persistant storage volume that allows for the retention of content between runs of the container. This retention of changes **only applies outside of the workshop folder in the platform** each time the workshop platform is started it pulls the current workshop content from GitHub - overwriting any local changes to the workshop materials. 
 
-2. To run both the *playground* and *instruction* environments in parallel on your system - allowing for providing instruction from one 
 
-	docker-compose -f docker-compose-full up -d --build
-
-command. As noted above, once running, the platform should be available through a web browser on your local computer at:
-
-[http://localhost:8888](http://localhost:8888) and [http://localhost:8787](http://localhost:8787) for the *playground*
-
-[http://localhost:8889](http://localhost:8889) and [http://localhost:8788](http://localhost:8788) for the *instruction* platform
-
-In both cases these commands will download and build all of the necessary components of the platform, and start it running. This initial build process (which may take some time, based on the speed of your network connection and your computer) is only executed the first time you run the command and when changes are made to the instructions for building and running the platform. Future excution of this command will go much more quickly as the previously built components will be reused.  
-
-**The default password for both the *playground* and the *instruction* platform is `password`. See below for instructions for changing the default password for your copy of the platform.**
-
-To shutdown the platform running on your system issue a `docker-compose down` command from the same directory where the platform was run from. 
-
-## Changing the Default Password For Local or Server-based Platform
-
-The passwords used by the *instruction* and *playground* platforms are defined in the startup scripts that are run when starting the platform. Changing those passwords is a two-step process:
-
-1. Generate a SHA1 password hash for your chosen password. You can use the `SHA1 Password Calculator.ipynb` included in this repository, and included in the collection of workshop repositories transferred into the platform when it is started up. 
-
-2. Replace the default password in one or both startup scripts with the new SHA1 password hash. Specifically, the startup scripts for the *instruction* and *playground* platforms are:
-
-    startup_instruction.sh
-    
-    startup_playground.sh
-
-respectively. Each of these files contains local comments that indicate where the values should be changed. 
-
-After changing the passwords in these files they will be enabled when the platforms are restarted by using the `docker-compose down` and desired `docker-compose up` command highlighted above. 
+The default password for the running workshop platform is `password`. 
