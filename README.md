@@ -52,4 +52,4 @@ If you want to remove any new or modified files from your local copy of the work
 This will remove the persistant storage volume that allows for the retention of content between runs of the container. This retention of changes **only applies outside of the workshop folder in the platform** each time the workshop platform is started it pulls the current workshop content from GitHub - overwriting any local changes to the workshop materials. 
 
 
-The default password for the running workshop platform is `password`. 
+The default password for the running workshop platform is `password`. The password used by the platform may be changed by editing the `startup_instruction.sh` and `startup_playground.sh` files in the `jupyter` folder in each workshop. 
