@@ -17,10 +17,13 @@ COPY startup_instruction.sh /home/root/startup_instruction.sh
 COPY startup_playground.sh /home/root/startup_playground.sh
 COPY refreshWorkshops.sh /home/root/refreshWorkshops.sh
 COPY setGitOptions.sh /home/root/setGitOptions.sh
+COPY SHA1PasswordCalculator.ipynb /home/root/SHA1PasswordCalculator.ipynb
 RUN chmod ugo+x /home/root/startup_instruction.sh
 RUN chmod ugo+x /home/root/startup_playground.sh
 RUN chmod ugo+rx /home/root/refreshWorkshops.sh
 RUN chmod ugo+rx /home/root/setGitOptions.sh
+RUN chmod ugo+rx /home/root/SHA1PasswordCalculator.ipynb
+
 
 ## Taskjuggler and Ruby
 RUN apt-get update && \
