@@ -12,7 +12,7 @@ git config credential.helper store
 git config --global credential.helper 'cache --timeout 7200'
 
 if [ $# -ne 2 ]; then
-    echo $0: usage: setGitOptions.sh <name> <email>
+    echo $0: 'usage: setGitOptions.sh <name> <email>'
     exit 1
 fi
 
