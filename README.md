@@ -6,7 +6,7 @@ Each workshop folder contains one or more `docker-compose` YAML files that, when
 
 The current workshops included in the repository include:
 
-* `Project-Management`: a workshop focused on presenting basic research project management principles and providing hands-on experience in using [TaskJuggler](http://taskjuggler.org) to plan, execute, and track project activities and progress. 
+* `Project-Management`: a workshop focused on presenting basic research project management principles and providing hands-on experience in using [TaskJuggler](http://taskjuggler.org) to plan, execute, and track project activities and progress. When the platform is run the content from the [workshops-pm](https://github.com/karlbenedict/workshops-pm) repository is imported into the platform. 
 
 ## Requirements to run the platform
 
@@ -52,4 +52,5 @@ If you want to remove any new or modified files from your local copy of the work
 This will remove the persistant storage volume that allows for the retention of content between runs of the container. This retention of changes **only applies outside of the workshop folder in the platform** each time the workshop platform is started it pulls the current workshop content from GitHub - overwriting any local changes to the workshop materials. 
 
 
-The default password for the running workshop platform is `password`. The password used by the platform may be changed by editing the `startup_instruction.sh` and `startup_playground.sh` files in the `jupyter` folder in each workshop. 
+The default password for the running workshop platform is `password`. The password used by the platform may be changed by editing the `startup_instruction.sh` and `startup_playground.sh` files in the `jupyter` folder in each workshop. The `SHA1 Password Calculator.ipynb` notebook in the `Utility-Scripts` folder may be used ot generate a new password hash that can be pasted into one or both of the startup scripts. 
+
