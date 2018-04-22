@@ -1,0 +1,18 @@
+version: '3'
+services:
+  playground:
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - playground-data:/home/jovyan
+      - ./local:/home/jovyan/local
+    restart: on-failure
+    
+    # replace the hashed password in this command with your own generated with IPython.lib.passwd
+    command: /home/root/startup_playground.sh # --NotebookApp.base_url=/home/jovyan
+
+volumes:
+  playground-data:
