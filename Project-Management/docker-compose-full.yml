@@ -5,7 +5,7 @@ services:
       context: ./jupyter
       dockerfile: Dockerfile
     ports:
-      - "8889:8888"
+      - "8989:8888"
     volumes:
       - instruction-data:/home/jovyan
     restart: on-failure
@@ -18,7 +18,7 @@ services:
       context: ./jupyter
       dockerfile: Dockerfile
     ports:
-      - "8888:8888"
+      - "8988:8888"
     volumes:
       - playground-data:/home/jovyan
     restart: on-failure
